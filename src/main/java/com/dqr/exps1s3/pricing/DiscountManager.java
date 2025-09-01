@@ -28,6 +28,11 @@ public final class DiscountManager {
         return registry.getOrDefault(code.toUpperCase(), List.of());
     }
 
+    // CHANGE: exponer códigos registrados para la CLI
+    public java.util.Set<String> getRegisteredCodes() { // CHANGE
+        return java.util.Collections.unmodifiableSet(registry.keySet()); // CHANGE
+    } // CHANGE
+
     public Component applyCodeToComponent(String code, Component base) {
         DiscountInvoker inv = new DiscountInvoker();
         getCommands(code).forEach(inv::add);
